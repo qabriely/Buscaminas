@@ -1,0 +1,46 @@
+program buscaminas;
+
+uses
+  crt;
+const
+  FACIL = 1;
+  MEDIO = 2;
+  DIFICIL = 3;
+var
+// Tamaño de tablero y cantidad de minas para cada nivel de dificultad.
+  TAMANO: array[1..3, 1..2] of integer = ((8, 8), (16, 16), (16, 30));
+  MINAS: array[1..3] of integer = (10, 40, 99);
+  
+type
+  Tablero = array of array of char;
+  Coordenada = record
+    fila, columna: integer;
+  end;
+
+var
+  tableroVisible: Tablero;
+  tableroReal: Tablero;
+  coordenadaActual: Coordenada;
+
+procedure inicializarTablero(var tableroVisible, tableroReal: Tablero; nivelDificultad: integer);
+var
+  i, j: integer;
+begin
+  // Inicializar tablero visible
+  SetLength(tableroVisible, TAMANO[nivelDificultad][1], TAMANO[nivelDificultad][2]);
+  for i := 0 to TAMANO[nivelDificultad][1] - 1 do
+    for j := 0 to TAMANO[nivelDificultad][2] - 1 do
+      tableroVisible[i, j] := '-';
+
+  // Inicializar tablero real
+  SetLength(tableroReal, TAMANO[nivelDificultad][1], TAMANO[nivelDificultad][2]);
+  for i := 0 to TAMANO[nivelDificultad][1] - 1 do
+    for j := 0 to TAMANO[nivelDificultad][2] - 1 do
+      tableroReal[i, j] := ' ';
+end;
+
+
+
+
+
+
