@@ -1,2 +1,0 @@
-# Buscaminas
-Proyecto II
