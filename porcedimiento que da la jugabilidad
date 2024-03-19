@@ -1,0 +1,47 @@
+procedure jugar(nivelDificultad: integer);
+var
+  fila, columna: integer;
+  jugando, jugarOtraVez: boolean;
+  respuesta: char;
+begin
+  repeat
+    inicializarTablero(tableroVisible, tableroReal, nivelDificultad);
+    colocarMinas(tableroReal, nivelDificultad);
+    jugando := true;
+    while jugando do
+    begin
+      dibujarTablero(tableroVisible, nivelDificultad);
+      write('Selecciona la fila: ');
+      readln(fila);
+      write('Selecciona la columna: ');
+      readln(columna);
+      if (fila >= 1) and (fila <= TAMANO[nivelDificultad][1]) and (columna >= 1) and (columna <= TAMANO[nivelDificultad][2]) then
+      begin
+        if tableroReal[fila - 1, columna - 1] = '*' then
+        begin
+          writeln('¡Perdiste! Has encontrado una mina.');
+          writeln('Game Over');
+          tableroVisible[fila - 1, columna - 1] := '*';
+          dibujarTablero(tableroVisible, nivelDificultad);
+          jugando := false;
+        end
+        else
+        begin
+          coordenadaActual.fila := fila - 1;
+          coordenadaActual.columna := columna - 1;
+          descubrirCeldas(tableroVisible, tableroReal, coordenadaActual, nivelDificultad);
+          jugando := true;
+        end;
+      end
+      else
+        writeln('Coordenadas inválidas. Por favor, ingresa números entre 1 y ', TAMANO[nivelDificultad][1], ' para la fila y 1 y ', TAMANO[nivelDificultad][2], ' para la columna.');
+        readln;
+    end;
+    write('¿Deseas jugar otra vez? (S/N): ');
+    readln(respuesta);
+    jugarOtraVez := (respuesta = 'S') or (respuesta = 's');
+  until not jugarOtraVez;
+end;
+
+var
+  nivelDificultad: integer;
