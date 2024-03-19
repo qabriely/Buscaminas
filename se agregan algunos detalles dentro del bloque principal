@@ -1,0 +1,15 @@
+begin
+  randomize;
+  writeln('¡Bienvenido a Buscaminas!');
+  writeln('Selecciona el nivel de dificultad:');
+  writeln('1. Facil (8x8 con 10 minas)');
+  writeln('2. Medio (16x16 con 40 minas)');
+  writeln('3. Dificil (16x30 con 99 minas)');
+  repeat
+    write('Ingresa el numero correspondiente al nivel de dificultad: ');
+    readln(nivelDificultad);
+    if (nivelDificultad < FACIL) or (nivelDificultad > DIFICIL) then
+      writeln('Error: Debes ingresar 1, 2 o 3 para seleccionar el nivel de dificultad.');
+  until (nivelDificultad >= FACIL) and (nivelDificultad <= DIFICIL);
+  jugar(nivelDificultad);
+end.
